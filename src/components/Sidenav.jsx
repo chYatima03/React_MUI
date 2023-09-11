@@ -24,6 +24,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from '../pages/appStore';
 
+import GridViewIcon from '@mui/icons-material/GridView';
+import StorageIcon from '@mui/icons-material/Storage';
+import SearchIcon from '@mui/icons-material/Search';
+import DatasetLinkedIcon from '@mui/icons-material/DatasetLinked';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -97,11 +102,11 @@ export default function Sidenav() {
   const navaigate = useNavigate();
   // const updateOpen = useAppStore((state) => state.updateOpen)
   const open = useAppStore((state) => state.dopen)
-// alert(open)
+  // alert(open)
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Box height={30}  />
+      <Box height={30} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton >
@@ -114,7 +119,135 @@ export default function Sidenav() {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={()=> {navaigate("/")} } >
+          
+          {/* <ListItem disablePadding sx={{ display: "block" }} onClick={()=> {navaigate("/analytics")} }>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <AnalyticsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Analytics" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem> */}
+
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/") }} >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <GridViewIcon />
+                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+              </ListItemIcon>
+              <ListItemText primary="หน้าหลักระบบ" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/defaultsettings") }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <DatasetLinkedIcon />
+                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+              </ListItemIcon>
+              <ListItemText primary="กำหนดค่าเริ่มต้น" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/projectdata") }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <StorageIcon />
+                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+              </ListItemIcon>
+              <ListItemText primary="ฐานข้อมูลโครงการ" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/projectinformation") }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <SearchIcon />
+                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+              </ListItemIcon>
+              <ListItemText primary="กรองข้อมูลโครงการ" sx={{ opacity: open ? 1 : 0 }} />
+
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/setting") }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <GroupIcon />
+                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+              </ListItemIcon>
+              <ListItemText primary="ข้อมูลผู้ใช้งานระบบ" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/") }} >
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -135,7 +268,7 @@ export default function Sidenav() {
               <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={()=> {navaigate("/products")} }>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/products") }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -156,28 +289,7 @@ export default function Sidenav() {
               <ListItemText primary="Products" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={()=> {navaigate("/analytics")} }>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <AnalyticsIcon />
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-              </ListItemIcon>
-              <ListItemText primary="Analytics" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={()=> {navaigate("/setting")} }>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/setting") }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -251,7 +363,7 @@ export default function Sidenav() {
         </List> */}
       </Drawer>
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}> */}
-       
+
       {/* </Box> */}
     </Box>
   );

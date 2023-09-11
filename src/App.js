@@ -3,11 +3,15 @@ import './App.css';
 // import MiniDrawer from './components/Sidenav';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import Home from './pages/home';
+// import Home from './pages/home';
 // import About from './pages/About';
+import Dashboad from './pages/Dashboad';
 import SettingPage from './pages/SettingPage';
 import Analytics from './pages/Analytics';
 import Products from './pages/Products';
+import DefaultSettingsPage from './pages/DefaultSettingsPage';
+import ProjectData from './pages/ProjectData';
+import ProjectInformation from './pages/ProjectInformation';
 // import ProductList from './pages/Products/ProductList';
 
 function App() {
@@ -15,10 +19,14 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path='/' exact element={<Home />}></Route>
+      <Route path='/' exact element={<Dashboad />}></Route>
       <Route path='/products' exact element={<Products />}></Route>
       <Route path='/analytics' exact element={<Analytics />}></Route>
       <Route path='/setting' exact element={<SettingPage />}></Route>
+      <Route path='/defaultsettings' exact element={<DefaultSettingsPage />}></Route>
+      <Route path='/projectdata' exact element={<ProjectData />}></Route>
+      <Route path='/projectinformation' exact element={<ProjectInformation />}></Route>
+      
     </Routes>
     </BrowserRouter>
     {/* <MiniDrawer /> */}
