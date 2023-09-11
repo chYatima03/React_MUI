@@ -112,6 +112,7 @@ export default function ProjectDataAllList() {
     // const handleAddOpen = () => setEditOpen(true);
     const handleEditOpen = () => setEditOpen(true);
     const handleEditClose = () => setEditOpen(false);
+    const [preview, setPreview] = useState("");
 
     const style = {
         position: "absolute",
@@ -188,11 +189,12 @@ export default function ProjectDataAllList() {
     };
 
     const viewProject = async (id) => {
-        alert(id)
+        // alert(id)
+        setPreview(id);
     }
     return (
         <>
-            {rows.length > 0 && (
+            {rows.length > 0 && preview == "" && (
 
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                     {/* <Outlet /> */}
@@ -451,7 +453,7 @@ export default function ProjectDataAllList() {
                     />
                 </Paper>
             )}
-            {rows.length == 0 && (
+            {rows.length == 0 && preview == "" && (
                 <>
                     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
                         <Box height={20} />
@@ -492,6 +494,12 @@ export default function ProjectDataAllList() {
                     <EditProjectData closeEvent={handleEditClose} fid={formid} />
                 </Box>
             </Modal>
+
+            {preview != "" && (
+                <>
+                ss
+                </>
+            )}
         </>
     );
 }
