@@ -9,6 +9,9 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
+import DepartmentList from "./DepartmentList";
+import SupplierList from "./SupplierList";
+import WorktypeList from "./WorktypeList";
 // import Personal from "./Personal";
 // import Profile from "./Profile";
 
@@ -72,26 +75,37 @@ export default function DefaultSettingsList() {
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="ข้อมูลแผนการพัฒนา" {...a11yProps(0)} />
-                <Tab label="ข้อมูลผู้รับเหมา" {...a11yProps(1)} />
-                <Tab label="ข้อมูลแผนงาน" {...a11yProps(2)} />
-                <Tab label="ข้อมูลประเภทงาน" {...a11yProps(3)} />
-                <Tab label="ข้อมูลประเภทงบประมาณ" {...a11yProps(4)} />
-                <Tab label="ข้อมูลประเภทรายจ่าย" {...a11yProps(5)} />
-                <Tab label="ข้อมูลแผนก/ฝ่าย" {...a11yProps(6)} />
+                {/* <Tab label="ข้อมูลแผนการพัฒนา" {...a11yProps(0)} /> */}
+                <Tab label="ข้อมูลผู้รับเหมา" {...a11yProps(0)} />
+                {/* <Tab label="ข้อมูลแผนงาน" {...a11yProps(2)} /> */}
+                <Tab label="ข้อมูลประเภทงาน" {...a11yProps(1)} />
+                {/* <Tab label="ข้อมูลประเภทงบประมาณ" {...a11yProps(4)} /> */}
+                {/* <Tab label="ข้อมูลประเภทรายจ่าย" {...a11yProps(5)} /> */}
+                <Tab label="ข้อมูลแผนก/ฝ่าย" {...a11yProps(2)} />
               </Tabs>
             </Box>
-            <CustomTabPanel value={value} index={0}>
-              {/* <Profile /> */}
+            {/* <CustomTabPanel value={value} index={0}>
               a
+            </CustomTabPanel> */}
+            <CustomTabPanel value={value} index={0}>
+              <SupplierList />
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              {/* <Personal /> */}
-              b
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
+            {/* <CustomTabPanel value={value} index={2}>
               Item Three
+            </CustomTabPanel> */}
+            <CustomTabPanel value={value} index={1}>
+              <WorktypeList />
             </CustomTabPanel>
+            {/* <CustomTabPanel value={value} index={4}>
+              Item Three
+            </CustomTabPanel> */}
+            {/* <CustomTabPanel value={value} index={5}>
+              Item Three
+            </CustomTabPanel> */}
+            <CustomTabPanel value={value} index={2}>
+             <DepartmentList />
+            </CustomTabPanel>
+            
           </Box>
         </CardContent>
       </Card>

@@ -1,14 +1,3 @@
-// import * as React from 'react';
-// import Paper from '@mui/material/Paper';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TablePagination from '@mui/material/TablePagination';
-// import TableRow from '@mui/material/TableRow';
-// import { useAppStore } from '../appStore';
-// import * as React from 'react';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -41,63 +30,15 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import { useState, useEffect } from "react";
-import EditProjectData from "./test/EditProjectData";
-import AddProjectData from "./test/AddProjectData";
+import EditProjectData from "../TabProjectData/test/EditProjectData";
+import AddProjectData from "../TabProjectData/test/AddProjectData";
 // import AddProduct from "../Products/AddProduct";
 import { useAppStore } from "../appStore";
 import { Outlet } from "react-router-dom";
-import ProjectInformationList from "../ProjectInformation/ProjectInformationList";
+import { Drawer, Grid, IconButton } from "@mui/material";
 
-// const columns = [
-//     { id: 'name', label: 'Name', minWidth: 170 },
-//     { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-//     {
-//         id: 'population',
-//         label: 'Population',
-//         minWidth: 170,
-//         align: 'right',
-//         format: (value) => value.toLocaleString('en-US'),
-//     },
-//     {
-//         id: 'size',
-//         label: 'Size\u00a0(km\u00b2)',
-//         minWidth: 170,
-//         align: 'right',
-//         format: (value) => value.toLocaleString('en-US'),
-//     },
-//     {
-//         id: 'density',
-//         label: 'Density',
-//         minWidth: 170,
-//         align: 'right',
-//         format: (value) => value.toFixed(2),
-//     },
-// ];
 
-// function createData(name, code, population, size) {
-//     const density = population / size;
-//     return { name, code, population, size, density };
-// }
-
-// const rows = [
-//     createData('India', 'IN', 1324171354, 3287263),
-//     createData('China', 'CN', 1403500365, 9596961),
-//     createData('Italy', 'IT', 60483973, 301340),
-//     createData('United States', 'US', 327167434, 9833520),
-//     createData('Canada', 'CA', 37602103, 9984670),
-//     createData('Australia', 'AU', 25475400, 7692024),
-//     createData('Germany', 'DE', 83019200, 357578),
-//     createData('Ireland', 'IE', 4857000, 70273),
-//     createData('Mexico', 'MX', 126577691, 1972550),
-//     createData('Japan', 'JP', 126317000, 377973),
-//     createData('France', 'FR', 67022000, 640679),
-//     createData('United Kingdom', 'GB', 67545757, 242495),
-//     createData('Russia', 'RU', 146793744, 17098246),
-//     createData('Nigeria', 'NG', 200962417, 923768),
-//     createData('Brazil', 'BR', 210147125, 8515767),
-// ];
-
-export default function ProjectDataAllList() {
+export default function DepartmentList() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const setRows = useAppStore((state) => state.setRows);
@@ -114,6 +55,12 @@ export default function ProjectDataAllList() {
     const handleEditOpen = () => setEditOpen(true);
     const handleEditClose = () => setEditOpen(false);
     const [preview, setPreview] = useState("");
+    const [state, setState] = useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
 
     const style = {
         position: "absolute",
@@ -193,7 +140,193 @@ export default function ProjectDataAllList() {
         // alert(id)
         setPreview(id);
     }
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (
+            event.type === "keydown" &&
+            (event.key === "Tab" || event.key === "Shift")
+        ) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+    const list = (anchor) => (
+        <>
+
+            <Box
+                sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 550 }} >
+                <Box height={70} />
+                <Grid
+                    container
+                    direction="column"
+                    style={{ height: "90vh" }}
+                    justifyContent="space-between"
+                // alignItems="start"
+                >
+                    <Stack direction="column" spacing={2} className="my-2 mb-2" sx={{ padding: "20px 20px 20px 20px" }}>
+                        <Stack direction="row" spacing={2} className="my-2 mb-2" >
+                            <Typography
+                                gutterBottom
+                                variant="h6"
+                                component="div"
+
+                            >
+                                เพิ่มข้อมูลแผนก/ฝ่าย
+
+                            </Typography>
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{ flexGrow: 1 }}
+                            ></Typography>
+                            <Button
+                                variant="contained"
+                                sx={{ width: 100, height: 40 }}
+                                endIcon={<AddCircleIcon />}
+                            // onClick={addFields}
+
+                            // onClick={handleOpen}
+
+                            >
+                                เพิ่ม
+                            </Button>
+                        </Stack>
+
+                        {/* {formFields.map((form, index) => { */}
+                        {/* return ( */}
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }} >
+                            <Stack direction="row" spacing={2} className="my-2 mb-2" sx={{ padding: "20px 20px 20px 20px" }}>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        id="standard-helperText"
+                                        label="ชื่อแผนก"
+                                        type="text"
+                                        // defaultValue="Default Value"
+                                        helperText=""
+                                        variant="standard"
+                                        size="small"
+                                        sx={{ minWidth: "100%" }}
+                                    //  onChange={handlePriceChange}
+                                    //   onChange={event => handleFormChange(event, index)}
+                                    //   value={form.ordername}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={4} >
+                                    <TextField
+                                        id="standard-helperText"
+                                        label="ชื่อฝ่าย"
+                                        type="text"
+                                        // defaultValue="Default Value"
+                                        helperText=""
+                                        variant="standard"
+                                        size="small"
+                                        sx={{ minWidth: "100%" }}
+                                    //   onChange={event => handleFormChange(event, index)}
+                                    //   value={form.ordercount}
+                                    />
+                                </Grid>
+                                <Grid item xs={4} >
+                                    <TextField
+                                        id="standard-helperText"
+                                        label="ชื่อตำแหน่ง"
+                                        type="text"
+                                        // defaultValue="Default Value"
+                                        helperText=""
+                                        variant="standard"
+                                        size="small"
+                                        sx={{ minWidth: "100%" }}
+                                    //   onChange={event => handleFormChange(event, index)}
+                                    //   value={form.orderprice}
+                                    />
+                                </Grid>
+
+
+                                <IconButton className="delorder" sx={{ color: "#f44336" }}
+                                //   onClick={() => removeFields(index)}
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+
+                            </Stack>
+                        </Paper>
+                        {/* ) */}
+                        {/* })} */}
+                    </Stack>
+
+                    {/* <div> */}
+                    <Stack direction="column" alignItems="end" spacing={2} className="my-2 mb-2" sx={{ padding: "10px 20px 20px 20px" }}>
+                        {/* <Stack direction="column" justifyContent="end" alignItems="end" sx={{ padding: "10px 00px 80px 20px" }}>
+                            <Stack direction="row" justifyContent="end">
+                                <Grid container xs={12} >
+                                    <Typography
+                                        gutterBottom
+                                        variant="h7"
+                                        component="div"
+                                        sx={{ padding: "10px 130px 0px 20px" }}
+                                    >
+                                        รวมเป็นเงิน
+                                    </Typography>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h7"
+                                        component="div"
+                                        sx={{ padding: "10px 0px 0px 20px" }}
+                                    >
+                                        58,000.00
+                                    </Typography>
+                                </Grid>
+                            </Stack>
+                            <Stack direction="row" justifyContent="end">
+                                <Grid container xs={12} >
+                                    <Typography
+                                        gutterBottom
+                                        variant="h7"
+                                        component="div"
+                                        sx={{ padding: "10px 130px 0px 20px" }}
+                                    >
+                                        จำนวนเงินรวมทั้งสิ้น
+                                    </Typography>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h7"
+                                        component="div"
+                                        sx={{ padding: "10px 0px 0px 20px" }}
+                                    >
+                                        58,000.00
+                                    </Typography>
+                                </Grid>
+                            </Stack>
+                        </Stack> */}
+                        <Stack direction="row" >
+                            <Button
+                                variant="contained"
+                                color="error"
+                            // onClick={createUser}
+                            >
+                                ยกเลิก
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="success"
+                            // onClick={submit}
+                            // onClick={createUser}
+                            >
+                                บันทึก
+                            </Button>
+                        </Stack>
+                    </Stack>
+
+                    {/* </div> */}
+                </Grid>
+            </Box>
+
+        </>
+
+    );
+
     return (
+        // <div>DepartmentList</div>
         <>
             {rows.length > 0 && preview == "" && (
 
@@ -206,7 +339,7 @@ export default function ProjectDataAllList() {
                             component="div"
                             sx={{ padding: "20px" }}
                         >
-                            จัดการข้อมูลโครงการ
+                            ข้อมูลแผนก/ฝ่าย
 
                         </Typography>
                         <Typography
@@ -218,58 +351,58 @@ export default function ProjectDataAllList() {
                             disablePortal
                             id="combo-box-demo"
                             options={rows}
-                            sx={{ width: 300, padding: "20px 0px 20px 0px" }}
+                            sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
                             getOptionLabel={(rows) => rows.name || ""}
                             renderInput={(params) => (
-                                <TextField {...params} size="small" label="ค้นหาชื่อโครงการ" />
+                                <TextField {...params} size="small" label="ค้นหาชื่อแผนก" />
                             )}
                         />
                         <Autocomplete
                             disablePortal
                             id="combo-box-demo"
                             options={rows}
-                            sx={{ width: 100, padding: "20px 0px 20px 0px" }}
+                            sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
                             getOptionLabel={(rows) => rows.year || ""}
                             renderInput={(params) => (
-                                <TextField {...params} size="small" label="ปี" />
+                                <TextField {...params} size="small" label="ค้นหาชื่อฝ่าย" />
                             )}
                         />
                         <Autocomplete
                             disablePortal
                             id="combo-box-demo"
                             options={rows}
-                            sx={{ width: 100, padding: "20px 0px 20px 0px" }}
+                            sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
                             getOptionLabel={(rows) => rows.projectstatus || ""}
                             renderInput={(params) => (
-                                <TextField {...params} size="small" label="สถานะ" />
+                                <TextField {...params} size="small" label="ค้นหาชื่อตำแหน่ง" />
                             )}
                         />
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={rows}
-                            sx={{ width: 200, padding: "20px 0px 20px 0px" }}
-                            onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.department || ""}
-                            renderInput={(params) => (
-                                <TextField {...params} size="small" label="แผนก/ฝ่าย" />
-                            )}
-                        />
+                        {/* <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={rows}
+                        sx={{ width: 200, padding: "20px 0px 20px 0px" }}
+                        onChange={(e, v) => filterData(v)}
+                        getOptionLabel={(rows) => rows.department || ""}
+                        renderInput={(params) => (
+                            <TextField {...params} size="small" label="แผนก/ฝ่าย" />
+                        )}
+                    />
 
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={rows}
-                            sx={{ width: 200, padding: "20px 0px 20px 0px" }}
-                            onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.username || ""}
-                            renderInput={(params) => (
-                                <TextField {...params} size="small" label="เจ้าของโครงการ" />
-                            )}
-                        />
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={rows}
+                        sx={{ width: 200, padding: "20px 0px 20px 0px" }}
+                        onChange={(e, v) => filterData(v)}
+                        getOptionLabel={(rows) => rows.username || ""}
+                        renderInput={(params) => (
+                            <TextField {...params} size="small" label="เจ้าของโครงการ" />
+                        )}
+                    /> */}
                         <Typography
                             gutterBottom
                             variant="h6"
@@ -284,6 +417,22 @@ export default function ProjectDataAllList() {
                             >
                                 Export
                             </Button>
+                            <Button
+                                variant="contained"
+                                sx={{ width: 100, height: 40 }}
+                                endIcon={<AddCircleIcon />}
+                                onClick={toggleDrawer("right", true)}>
+
+                                เพิ่ม
+                            </Button>
+                            <Drawer
+                                anchor="right"
+                                open={state["right"]}
+                                onClose={toggleDrawer("right", false)}
+                            >
+                                {list("right")}
+                            </Drawer>
+
                         </Typography>
                         {/* <Typography
                             gutterBottom
@@ -326,36 +475,27 @@ export default function ProjectDataAllList() {
                                         ลำดับ
                                     </TableCell>
                                     <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        สถานะ
-                                    </TableCell>
-                                    <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        ปี
-                                    </TableCell>
-                                    <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        ชื่อโครงการ
-                                    </TableCell>
-                                    <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        มูลค่า
-                                    </TableCell>
-                                    <TableCell align="left" style={{ minWidth: "100px" }}>
                                         แผนก
                                     </TableCell>
                                     <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        ผู้เสนอโครงการ
+                                        ฝ่าย
+                                    </TableCell>
+                                    {/* <TableCell align="left" style={{ minWidth: "100px" }}>
+                                        ชื่อโครงการ
+                                    </TableCell> */}
+                                    <TableCell align="left" style={{ minWidth: "100px" }}>
+                                        ตำแหน่ง
                                     </TableCell>
 
                                     <TableCell align="left" style={{ minWidth: "100px" }}>
-                                        วันที่เสนอโครงการ
-                                    </TableCell>
-                                    {/* <TableCell align="left" style={{ minWidth: "100px" }}>
 
-                                    </TableCell> */}
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {rows
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row,index) => {
+                                    .map((row, index) => {
                                         return (
                                             <TableRow
                                                 hover
@@ -364,8 +504,8 @@ export default function ProjectDataAllList() {
                                                 key={row.code}
 
                                             >
-                                                <TableCell align="left">{index+1}</TableCell>
-                                                <TableCell align="left">
+                                                <TableCell align="left">{index + 1}</TableCell>
+                                                {/* <TableCell align="left">
                                                     <Autocomplete
                                                         disablePortal
                                                         id="combo-box-demo"
@@ -377,14 +517,17 @@ export default function ProjectDataAllList() {
                                                             <TextField {...params} size="small" label="สถานะ" />
                                                         )}
                                                     />
-                                                </TableCell>
-                                                <TableCell align="left">{row.year}</TableCell>
-                                                <TableCell align="left" onClick={() => { viewProject(row.id) }}>{row.name}</TableCell>
-                                                <TableCell align="left">{row.price}</TableCell>
-                                                <TableCell align="left">{row.department}</TableCell>
-                                                <TableCell align="left">{row.username}</TableCell>
-                                                <TableCell align="left">{row.date}</TableCell>
-                                                {/* <TableCell align="left">
+                                                </TableCell> */}
+                                                <TableCell align="left">เทคโนโลียรสารสนเทศ</TableCell>
+                                                <TableCell align="left">โปรแกรมเมอร์</TableCell>
+                                                <TableCell align="left">หัวหน้าหน่วยโปรแกรมเมอร์</TableCell>
+                                                {/* <TableCell align="left">{row.year}</TableCell> */}
+                                                {/* <TableCell align="left" onClick={() => { viewProject(row.id) }}>{row.name}</TableCell> */}
+                                                {/* <TableCell align="left">{row.price}</TableCell> */}
+                                                {/* <TableCell align="left">{row.department}</TableCell> */}
+                                                {/* <TableCell align="left">{row.username}</TableCell> */}
+                                                {/* <TableCell align="left">{row.date}</TableCell> */}
+                                                <TableCell align="left">
                                                     <Stack spacing={2} direction="row">
                                                         <EditIcon
                                                             style={{
@@ -393,19 +536,19 @@ export default function ProjectDataAllList() {
                                                                 cursor: "pointer",
                                                             }}
                                                             className="cursor-pointer"
-
-                                                            onClick={() => {
-                                                                editUser(
-                                                                    row.id,
-                                                                    row.name,
-                                                                    row.price,
-                                                                    row.department,
-                                                                    row.projectstatus,
-                                                                    row.username,
-                                                                    row.year,
-                                                                    row.date
-                                                                );
-                                                            }}
+                                                            onClick={toggleDrawer("right", true)}
+                                                        // onClick={() => {
+                                                        //     editUser(
+                                                        //         row.id,
+                                                        //         row.name,
+                                                        //         row.price,
+                                                        //         row.department,
+                                                        //         row.projectstatus,
+                                                        //         row.username,
+                                                        //         row.year,
+                                                        //         row.date
+                                                        //     );
+                                                        // }}
                                                         />
                                                         <DeleteIcon
                                                             style={{
@@ -413,12 +556,12 @@ export default function ProjectDataAllList() {
                                                                 color: "darkred",
                                                                 cursor: "pointer",
                                                             }}
-                                                            onClick={() => {
-                                                                deleteUser(row.id);
-                                                            }}
+                                                        // onClick={() => {
+                                                        //     deleteUser(row.id);
+                                                        // }}
                                                         />
                                                     </Stack>
-                                                </TableCell> */}
+                                                </TableCell>
                                             </TableRow>
                                         );
                                     })}
@@ -455,6 +598,7 @@ export default function ProjectDataAllList() {
                 </Paper>
             )}
             {rows.length == 0 && preview == "" && (
+
                 <>
                     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
                         <Box height={20} />
@@ -473,34 +617,7 @@ export default function ProjectDataAllList() {
                     </Paper>
                 </>
             )}
-            {/* Add */}
-            <Modal
-                open={open}
-                onClose={handleOpen}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <AddProjectData closeEvent={handleClose} />
-                </Box>
-            </Modal>
-            {/* Edit */}
-            <Modal
-                open={editopen}
-                onClose={handleEditOpen}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <EditProjectData closeEvent={handleEditClose} fid={formid} />
-                </Box>
-            </Modal>
-
-            {preview != "" && (
-                <>
-                <ProjectInformationList />
-                </>
-            )}
         </>
-    );
+    )
 }
+

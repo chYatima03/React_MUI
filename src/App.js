@@ -12,6 +12,7 @@ import Products from './pages/Products';
 import DefaultSettingsPage from './pages/DefaultSettingsPage';
 import ProjectData from './pages/ProjectData';
 import ProjectInformation from './pages/ProjectInformation';
+import testAlign from './pages/TabProjectData/testAlign';
 // import ProductList from './pages/Products/ProductList';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path='/defaultsettings' exact element={<DefaultSettingsPage />}></Route>
       <Route path='/projectdata' exact element={<ProjectData />}></Route>
       <Route path='/projectinformation' exact element={<ProjectInformation />}></Route>
+      <Route path='/test' exact element={<testAlign />}></Route>
       
     </Routes>
     </BrowserRouter>
