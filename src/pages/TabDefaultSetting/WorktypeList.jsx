@@ -43,7 +43,7 @@ export default function WorktypeList() {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const setRows = useAppStore((state) => state.setRows);
     const rows = useAppStore((state) => state.rows);
-    const empCollectionRef = collection(db, "Projects");
+    const empCollectionRef = collection(db, "ProjectType");
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -92,16 +92,10 @@ export default function WorktypeList() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const editUser = (id, name, price, department, projectstatus, username, year, date) => {
+    const editUser = (id, name) => {
         const data = {
             id: id,
-            name: name,
-            price: price,
-            department: department,
-            projectstatus: projectstatus,
-            username: username,
-            year: year,
-            date: date
+            name: name
         };
         setFormid(data);
         handleEditOpen();
@@ -518,7 +512,7 @@ export default function WorktypeList() {
                                                         )}
                                                     />
                                                 </TableCell> */}
-                                                <TableCell align="left">เทคโนโลยีสารสนเทศ</TableCell>
+                                                <TableCell align="left">{row.name}</TableCell>
                                                 {/* <TableCell align="left">โปรแกรมเมอร์</TableCell> */}
                                                 {/* <TableCell align="left">หัวหน้าหน่วยโปรแกรมเมอร์</TableCell> */}
                                                 {/* <TableCell align="left">{row.year}</TableCell> */}

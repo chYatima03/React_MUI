@@ -43,7 +43,7 @@ export default function SupplierList() {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const setRows = useAppStore((state) => state.setRows);
     const rows = useAppStore((state) => state.rows);
-    const empCollectionRef = collection(db, "Projects");
+    const empCollectionRef = collection(db, "Suppliers");
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -79,7 +79,7 @@ export default function SupplierList() {
     }, []);
     const getUsers = async () => {
         const data = await getDocs(empCollectionRef);
-        // console.log(data)
+        console.log(data)
         setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         // console.log(rows);
     };
@@ -92,16 +92,14 @@ export default function SupplierList() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const editUser = (id, name, price, department, projectstatus, username, year, date) => {
+    const editUser = (id, supplier_name, supplier_address, supplier_phone, supplier_fax, supplier_personal) => {
         const data = {
             id: id,
-            name: name,
-            price: price,
-            department: department,
-            projectstatus: projectstatus,
-            username: username,
-            year: year,
-            date: date
+            supplier_name: supplier_name,
+            supplier_address: supplier_address,
+            supplier_phone: supplier_phone,
+            supplier_fax: supplier_fax,
+            supplier_personal: supplier_personal
         };
         setFormid(data);
         handleEditOpen();
@@ -389,7 +387,7 @@ export default function SupplierList() {
                             options={rows}
                             sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.name || ""}
+                            getOptionLabel={(rows) => rows.supplier_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาชื่อผู้รับเหมา" />
                             )}
@@ -400,7 +398,7 @@ export default function SupplierList() {
                             options={rows}
                             sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.year || ""}
+                            getOptionLabel={(rows) => rows.supplier_phone || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาบุคคลที่ติดต่อ" />
                             )}
@@ -411,7 +409,7 @@ export default function SupplierList() {
                             options={rows}
                             sx={{ width: 130, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.projectstatus || ""}
+                            getOptionLabel={(rows) => rows.supplier_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาจังหวัด" />
                             )}
@@ -422,7 +420,7 @@ export default function SupplierList() {
                             options={rows}
                             sx={{ width: 130, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.projectstatus || ""}
+                            getOptionLabel={(rows) => rows.supplier_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาอำเภอ" />
                             )}
@@ -433,7 +431,7 @@ export default function SupplierList() {
                             options={rows}
                             sx={{ width: 130, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.projectstatus || ""}
+                            getOptionLabel={(rows) => rows.supplier_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาตำบล" />
                             )}
@@ -581,12 +579,12 @@ export default function SupplierList() {
                                                         )}
                                                     />
                                                 </TableCell> */}
-                                                <TableCell align="left">บริษัทโชคชัย</TableCell>
-                                                <TableCell align="left">78/52 ถนนทดสอบ ซอยทดสอบ ตำบลทดสอบ อำเภอทดสอบ จังหวัดสงขลา 91200</TableCell>
-                                                <TableCell align="left">085-951-7536</TableCell>
-                                                <TableCell align="left">022-558-9985</TableCell>
+                                                <TableCell align="left">{row.supplier_name}</TableCell>
+                                                <TableCell align="left">{row.supplier_address}</TableCell>
+                                                <TableCell align="left">{row.supplier_phone}</TableCell>
+                                                <TableCell align="left">{row.supplier_fax}</TableCell>
                                                 {/* <TableCell align="left" onClick={() => { viewProject(row.id) }}>{row.name}</TableCell> */}
-                                                <TableCell align="left">นายวิศรุต ก่อเกิดแก้ว</TableCell>
+                                                <TableCell align="left">{row.supplier_person}</TableCell>
                                                 {/* <TableCell align="left">{row.department}</TableCell> */}
                                                 {/* <TableCell align="left">{row.username}</TableCell> */}
                                                 {/* <TableCell align="left">{row.date}</TableCell> */}

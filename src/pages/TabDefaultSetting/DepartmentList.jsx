@@ -43,7 +43,7 @@ export default function DepartmentList() {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const setRows = useAppStore((state) => state.setRows);
     const rows = useAppStore((state) => state.rows);
-    const empCollectionRef = collection(db, "Projects");
+    const empCollectionRef = collection(db, "HierarchyCompany");
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -92,16 +92,12 @@ export default function DepartmentList() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const editUser = (id, name, price, department, projectstatus, username, year, date) => {
+    const editUser = (id, department_name, cotton_name, position_name) => {
         const data = {
             id: id,
-            name: name,
-            price: price,
-            department: department,
-            projectstatus: projectstatus,
-            username: username,
-            year: year,
-            date: date
+            department_name: department_name,
+            cotton_name: cotton_name,
+            position_name: position_name
         };
         setFormid(data);
         handleEditOpen();
@@ -353,7 +349,7 @@ export default function DepartmentList() {
                             options={rows}
                             sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.name || ""}
+                            getOptionLabel={(rows) => rows.department_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาชื่อแผนก" />
                             )}
@@ -364,7 +360,7 @@ export default function DepartmentList() {
                             options={rows}
                             sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.year || ""}
+                            getOptionLabel={(rows) => rows.cotton_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาชื่อฝ่าย" />
                             )}
@@ -375,7 +371,7 @@ export default function DepartmentList() {
                             options={rows}
                             sx={{ width: 250, padding: "20px 0px 20px 0px" }}
                             onChange={(e, v) => filterData(v)}
-                            getOptionLabel={(rows) => rows.projectstatus || ""}
+                            getOptionLabel={(rows) => rows.position_name || ""}
                             renderInput={(params) => (
                                 <TextField {...params} size="small" label="ค้นหาชื่อตำแหน่ง" />
                             )}
@@ -518,9 +514,9 @@ export default function DepartmentList() {
                                                         )}
                                                     />
                                                 </TableCell> */}
-                                                <TableCell align="left">เทคโนโลียรสารสนเทศ</TableCell>
-                                                <TableCell align="left">โปรแกรมเมอร์</TableCell>
-                                                <TableCell align="left">หัวหน้าหน่วยโปรแกรมเมอร์</TableCell>
+                                                <TableCell align="left">{row.department_name}</TableCell>
+                                                <TableCell align="left">{row.cotton_name}</TableCell>
+                                                <TableCell align="left">{row.position_name}</TableCell>
                                                 {/* <TableCell align="left">{row.year}</TableCell> */}
                                                 {/* <TableCell align="left" onClick={() => { viewProject(row.id) }}>{row.name}</TableCell> */}
                                                 {/* <TableCell align="left">{row.price}</TableCell> */}
