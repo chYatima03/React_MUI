@@ -38,7 +38,8 @@ import { Outlet } from "react-router-dom";
 import { Drawer, Grid, IconButton } from "@mui/material";
 
 
-export default function WorktypeList() {
+export default function WorktypeList({ closeEvent }) {
+    const [projectType, setProjectType] = useState("");
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const setRows = useAppStore((state) => state.setRows);
@@ -92,6 +93,18 @@ export default function WorktypeList() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    const handleProjectTypeChange = (event) => {
+        setProjectType(event.target.value);
+    }
+    const createProjectType = async () => {
+        await addDoc(empCollectionRef, {
+            name: projectType,
+        });
+        getUsers();
+        // closeEvent();
+        Swal.fire("Submitted!", "Your file has been submitted.", "success");
+    }
+
     const editUser = (id, name) => {
         const data = {
             id: id,
@@ -117,7 +130,7 @@ export default function WorktypeList() {
     };
 
     const deleteApi = async (id) => {
-        const userDoc = doc(db, "Products", id);
+        const userDoc = doc(db, "ProjectType", id);
         await deleteDoc(userDoc);
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
         getUsers();
@@ -134,12 +147,15 @@ export default function WorktypeList() {
         // alert(id)
         setPreview(id);
     }
-    const toggleDrawer = (anchor, open) => (event) => {
+    const toggleDrawer = (anchor, open, action, id, name) => (event) => {
         if (
             event.type === "keydown" &&
             (event.key === "Tab" || event.key === "Shift")
         ) {
             return;
+        }
+        if (action == 'edit') {
+            setProjectType(name);
         }
 
         setState({ ...state, [anchor]: open });
@@ -200,7 +216,8 @@ export default function WorktypeList() {
                                         variant="standard"
                                         size="small"
                                         sx={{ minWidth: "100%" }}
-                                    //  onChange={handlePriceChange}
+                                        value={projectType}
+                                        onChange={handleProjectTypeChange}
                                     //   onChange={event => handleFormChange(event, index)}
                                     //   value={form.ordername}
                                     />
@@ -303,8 +320,8 @@ export default function WorktypeList() {
                             <Button
                                 variant="contained"
                                 color="success"
-                            // onClick={submit}
-                            // onClick={createUser}
+                                // onClick={submit}
+                                onClick={createProjectType}
                             >
                                 บันทึก
                             </Button>
@@ -415,14 +432,14 @@ export default function WorktypeList() {
                                 variant="contained"
                                 sx={{ width: 100, height: 40 }}
                                 endIcon={<AddCircleIcon />}
-                                onClick={toggleDrawer("right", true)}>
+                                onClick={toggleDrawer("right", true, 'add', 0, '')}>
 
                                 เพิ่ม
                             </Button>
                             <Drawer
                                 anchor="right"
                                 open={state["right"]}
-                                onClose={toggleDrawer("right", false)}
+                                onClose={toggleDrawer("right", false, '', 0, '')}
                             >
                                 {list("right")}
                             </Drawer>
@@ -513,14 +530,6 @@ export default function WorktypeList() {
                                                     />
                                                 </TableCell> */}
                                                 <TableCell align="left">{row.name}</TableCell>
-                                                {/* <TableCell align="left">โปรแกรมเมอร์</TableCell> */}
-                                                {/* <TableCell align="left">หัวหน้าหน่วยโปรแกรมเมอร์</TableCell> */}
-                                                {/* <TableCell align="left">{row.year}</TableCell> */}
-                                                {/* <TableCell align="left" onClick={() => { viewProject(row.id) }}>{row.name}</TableCell> */}
-                                                {/* <TableCell align="left">{row.price}</TableCell> */}
-                                                {/* <TableCell align="left">{row.department}</TableCell> */}
-                                                {/* <TableCell align="left">{row.username}</TableCell> */}
-                                                {/* <TableCell align="left">{row.date}</TableCell> */}
                                                 <TableCell align="left">
                                                     <Stack spacing={2} direction="row">
                                                         <EditIcon
@@ -530,29 +539,24 @@ export default function WorktypeList() {
                                                                 cursor: "pointer",
                                                             }}
                                                             className="cursor-pointer"
-
-                                                            // onClick={() => {
-                                                            //     editUser(
-                                                            //         row.id,
-                                                            //         row.name,
-                                                            //         row.price,
-                                                            //         row.department,
-                                                            //         row.projectstatus,
-                                                            //         row.username,
-                                                            //         row.year,
-                                                            //         row.date
-                                                            //     );
-                                                            // }}
+                                                            onClick={toggleDrawer("right", true, 'edit', row.id, row.name)}
+                                                        // onClick={() => {
+                                                        //     editUser(
+                                                        //         row.id,
+                                                        //         row.name
+                                                        //     );
+                                                        // }}
                                                         />
+
                                                         <DeleteIcon
                                                             style={{
                                                                 fontSize: "20px",
                                                                 color: "darkred",
                                                                 cursor: "pointer",
                                                             }}
-                                                            // onClick={() => {
-                                                            //     deleteUser(row.id);
-                                                            // }}
+                                                            onClick={() => {
+                                                                deleteUser(row.id);
+                                                            }}
                                                         />
                                                     </Stack>
                                                 </TableCell>
