@@ -1,7 +1,12 @@
 import React from 'react'
+import ProjectInfo from './ProjectInfo'
 
 export default function ProjectContract() {
   return (
-    <div>ProjectContract</div>
+    <>
+      <ProjectInfo />
+
+      <div>ProjectContract</div>
+    </>
   )
 }

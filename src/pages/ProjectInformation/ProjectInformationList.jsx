@@ -29,6 +29,7 @@ import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import ProjectInfo from "./ProjectInfo";
+import { Link, Outlet } from "react-router-dom";
 
 export default function ProjectInformationList() {
   return (
@@ -145,19 +146,34 @@ export default function ProjectInformationList() {
               </Grid> */}
               {/* <Box height={28} /> */}
               <Grid item xs={3}>
-                <Card sx={{ height: 60 + "vh" }}>
+                <Card sx={{ height: 60 + "vh", padding: "20px" }}>
                   <CardContent>
-                    <div>ข้อมูลทั่วไป</div>
-                    <div>ข้อมูลดำเนินการ</div>
-                    <div>ข้อมูลทำสัญญาจ้าง</div>
-                    <div>ข้อมูลการเบิกจ่ายเงิน</div>
+                    <Stack direction="column" spacing={1} >
+                      <label>หัวข้อโครงการ</label>
+                      <label>สถานะโครงการ</label>
+                      <label>ความก้าวหน้าโครงการ 100%</label>
+                    </Stack>
+                    <Divider />
+                    <Stack direction="column" spacing={1} >
+                      <Link to="">ข้อมูลทั่วไป</Link>
+                      <Divider />
+                      <Link to="project-contract">ข้อมูลดำเนินการ</Link>
+                      <Divider />
+                      <Link to="project-operational">ข้อมูลทำสัญญาจ้าง</Link>
+                      {/* <Link to="project-info">ข้อมูลการเบิกจ่ายเงิน</Link> */}
+                    </Stack>
+
+
+
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={9}>
                 <Card sx={{ height: 60 + "vh", }}>
                   <CardContent>
-                    <ProjectInfo />
+                  
+                    {/* <ProjectInfo /> */}
+                    <Outlet />
                     {/* <div className="paddingall">
                       <span className="priceTitle"> New Projects</span>
                     </div> */}

@@ -204,7 +204,7 @@ export default function Sidenav() {
               <ListItemText primary="ฐานข้อมูลโครงการ" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/projectinformation") }}>
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => { navaigate("/project-info") }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
