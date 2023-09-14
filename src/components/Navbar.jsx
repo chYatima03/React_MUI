@@ -17,13 +17,15 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import MuiAppBar from '@mui/material/AppBar';
 import { useAppStore } from '../pages/appStore';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const AppBar = styled(MuiAppBar, {
-    // shouldForwardProp: (prop) => prop !== 'open',
-  })(({ theme }) => ({
-    zIndex: theme.zIndex.drawer + 1,
- 
-  }));
+  // shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+
+}));
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -108,8 +110,9 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}><AccountCircleIcon />Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}><AccountCircleIcon />My account</MenuItem> */}
+      <MenuItem onClick={handleMenuClose}><LogoutIcon />Logout</MenuItem>
     </Menu>
   );
 
@@ -167,7 +170,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" elevation={0} sx={{backgroundColor: "#ffffff", color: "#2f2f2f"}}>
+      <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -185,9 +188,9 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            YMCHG
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -195,7 +198,7 @@ export default function Navbar() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">

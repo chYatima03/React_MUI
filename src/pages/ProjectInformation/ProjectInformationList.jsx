@@ -1,7 +1,7 @@
 // import React from 'react'
 
 // import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
@@ -30,8 +30,48 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import ProjectInfo from "./ProjectInfo";
 import { Link, Outlet } from "react-router-dom";
+import projectFilter from "./../../images/nuclear-energy-fusion-fission-isometric-composition-with-isolated-view-laboratory-with-machinery-units-scientists-vector-illustration/2302.i039.015.S.m004.c13.nuclear energy fusion fission isometric set.jpg";
+import { Slider } from "@mui/material";
+import InfoIcon from '@mui/icons-material/Info';
+import DatasetIcon from '@mui/icons-material/Dataset';
+import RunningWithErrorsIcon from '@mui/icons-material/RunningWithErrors';
+import GavelIcon from '@mui/icons-material/Gavel';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+
+const marks = [
+  {
+    value: 0,
+    label: '0°C',
+  },
+  {
+    value: 20,
+    label: '20°C',
+  },
+  {
+    value: 37,
+    label: '37°C',
+  },
+  {
+    value: 100,
+    label: '100°C',
+  },
+];
+
+function valuetext(value) {
+  return `${value}°C`;
+}
 
 export default function ProjectInformationList() {
+  const [sliderValue, setSliderValue] = useState(25)
+
+  // useEffect(() => {
+  //   sliderScroll();
+  //   // setSliderValue(50);
+  // }, []);
+  // const sliderScroll = () => {
+  //   setSliderValue(40);
+  //   // alert(sliderValue)
+  // }
   return (
     // <div>ProjectInformationList</div>
     <>
@@ -148,19 +188,93 @@ export default function ProjectInformationList() {
               <Grid item xs={3}>
                 <Card sx={{ height: 60 + "vh", padding: "20px" }}>
                   <CardContent>
-                    <Stack direction="column" spacing={1} >
-                      <label>หัวข้อโครงการ</label>
-                      <label>สถานะโครงการ</label>
-                      <label>ความก้าวหน้าโครงการ 100%</label>
+                    <Stack direction="column" justifyContent="flex-center" spacing={1} >
+                      <Box
+                        component="img"
+                        sx={{
+                          height: 233,
+                          width: 350,
+                          maxHeight: { xs: 233, md: 167 },
+                          maxWidth: { xs: 350, md: 250 },
+                        }}
+                        alt="The house from the offer."
+                        src={projectFilter}
+                      // src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+                      />
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                      // sx={{ padding: "20px" }}
+                      >
+                        หัวข้อโครงการ
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                      // sx={{ padding: "20px" }}
+                      >
+                        สถานะโครงการ
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="h7"
+                        component="div"
+                      // sx={{ padding: "20px" }}
+                      >
+                        ความก้าวหน้าโครงการ {sliderValue}%
+                      </Typography>
+                      <Box sx={{ width: 330 }}>
+                        <Slider
+                          aria-label="Always visible"
+                          defaultValue={sliderValue}
+                          getAriaValueText={valuetext}
+                          step={10}
+                          // marks={marks}
+                          // valueLabelDisplay="on"
+                          disabled={true}
+                        />
+                      </Box>
+
                     </Stack>
-                    <Divider />
+                    {/* <Divider /> */}
                     <Stack direction="column" spacing={1} >
-                      <Link to="">ข้อมูลทั่วไป</Link>
+                      <Stack direction="row" spacing={1} >
+                        <div className="iconProjectData">
+                          <InfoIcon />
+                        </div>
+                        <Link to="" className="menuProjectData"> ข้อมูลทั่วไป</Link>
+                      </Stack>
                       <Divider />
-                      <Link to="project-contract">ข้อมูลดำเนินการ</Link>
+                      <Stack direction="row" spacing={1} >
+                        <div className="iconProjectData">
+                          <DatasetIcon />
+                        </div>
+                        <Link to="project-detail" className="menuProjectData">รายละเอียดโครงการ</Link>
+                      </Stack>
                       <Divider />
-                      <Link to="project-operational">ข้อมูลทำสัญญาจ้าง</Link>
-                      {/* <Link to="project-info">ข้อมูลการเบิกจ่ายเงิน</Link> */}
+                      <Stack direction="row" spacing={1} >
+                        <div className="iconProjectData">
+                          <RunningWithErrorsIcon />
+                        </div>
+                        <Link to="project-contract" className="menuProjectData">ข้อมูลดำเนินการ</Link>
+                      </Stack>
+                      <Divider />
+                      <Stack direction="row" spacing={1} >
+                        <div className="iconProjectData">
+                          <GavelIcon />
+                        </div>
+                        <Link to="project-operational" className="menuProjectData">ข้อมูลทำสัญญาจ้าง</Link>
+                      </Stack>
+                      <Divider />
+                      <Stack direction="row" spacing={1} >
+                        <div className="iconProjectData">
+                          <FileDownloadIcon />
+                        </div>
+                        <Link to="project-report" className="menuProjectData">ดาวน์โหลดเอกสารโครงการ</Link>
+                        {/* <Link to="project-info">ข้อมูลการเบิกจ่ายเงิน</Link> */}
+                      </Stack>
                     </Stack>
 
 
@@ -169,18 +283,18 @@ export default function ProjectInformationList() {
                 </Card>
               </Grid>
               <Grid item xs={9}>
-                <Card sx={{ height: 60 + "vh", }}>
-                  <CardContent>
-                  
-                    {/* <ProjectInfo /> */}
-                    <Outlet />
-                    {/* <div className="paddingall">
+                {/* <Card sx={{ height: 60 + "vh", }}> */}
+                {/* <CardContent> */}
+
+                {/* <ProjectInfo /> */}
+                <Outlet />
+                {/* <div className="paddingall">
                       <span className="priceTitle"> New Projects</span>
                     </div> */}
 
 
-                  </CardContent>
-                </Card>
+                {/* </CardContent> */}
+                {/* </Card> */}
               </Grid>
             </Grid>
           </Box>

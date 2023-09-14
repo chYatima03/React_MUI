@@ -16,6 +16,7 @@ import testAlign from './pages/TabProjectData/testAlign';
 import ProjectInfo from './pages/ProjectInformation/ProjectInfo';
 import ProjectContract from './pages/ProjectInformation/ProjectContract';
 import ProjectOperational from './pages/ProjectInformation/ProjectOperational';
+import ProjectDetail from './pages/ProjectInformation/ProjectDetail';
 // import ProductList from './pages/Products/ProductList';
 
 function App() {
@@ -28,7 +29,16 @@ function App() {
           <Route path='/analytics' exact element={<Analytics />}></Route>
           <Route path='/setting' exact element={<SettingPage />}></Route>
           <Route path='/defaultsettings' exact element={<DefaultSettingsPage />}></Route>
-          <Route path='/projectdata' exact element={<ProjectData />}></Route>
+          {/* <Route path='/projectdata' exact element={<ProjectData />}></Route> */}
+          <Route path="/projectdata"  element={<ProjectData />}>
+            <Route
+              // path="project-info"
+              index  element={<ProjectInfo />}
+            />
+             <Route path="project-detail" element={<ProjectDetail />} />
+            <Route path="project-contract" element={<ProjectContract />} />
+            <Route path="project-operational" element={<ProjectOperational />} />
+          </Route>
           {/* <Route path='/projectinformation' exact element={<ProjectInformation />}></Route> */}
           <Route path='/test' exact element={<testAlign />}></Route>
           <Route path="/project-info"  element={<ProjectInformation />}>
@@ -36,6 +46,7 @@ function App() {
               // path="project-info"
               index  element={<ProjectInfo />}
             />
+             <Route path="project-detail" element={<ProjectDetail />} />
             <Route path="project-contract" element={<ProjectContract />} />
             <Route path="project-operational" element={<ProjectOperational />} />
           </Route>

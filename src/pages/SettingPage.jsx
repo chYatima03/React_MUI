@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Sidenav from "../components/Sidenav";
 import Navbar from "../components/Navbar";
 import List from "./TabSetting/List";
+import SettingList from "./TabSetting/SettingList";
 
 export default function SettingPage() {
   return (
@@ -18,7 +19,8 @@ export default function SettingPage() {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           
-          <List />
+          {/* <List /> */}
+          <SettingList />
         </Box>
       </Box>
       </div>

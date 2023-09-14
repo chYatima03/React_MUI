@@ -1,0 +1,106 @@
+// import React from 'react'
+// import ProjectInfo from './ProjectInfo'
+
+// export default function ProjectOperational() {
+//   return (
+//     // <>
+//     // <ProjectInfo />
+//     // <div>ProjectOperational</div>
+//     // </>
+//   )
+// }
+
+
+import React from 'react'
+import ProjectInfo from './ProjectInfo'
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material'
+
+export default function ProjectOperational() {
+  return (
+    <>
+      <Paper style={{ maxHeight: 800, overflow: 'auto' }} sx={{ padding: "20px" }}>
+        <ProjectInfo />
+        <Paper style={{ maxHeight: 550, overflow: 'auto' }} sx={{ padding: "20px" }}>
+          <Stack direction="column" spacing={1} className="my-2 mb-2" >
+            <div className="paddingall">
+              <Typography gutterBottom variant="h6" component="div">
+                ข้อมูลทำสัญญาจ้าง
+              </Typography>
+              <Divider />
+            </div>
+            <Stack direction="row" spacing={2} className="my-2 mb-2" >
+              {/* <span className="priceTitle"> หัวข้อโครงการ: </span> */}
+              <Typography gutterBottom variant="h7" component="div" >
+                เอกสารสัญญากับ Suppiler
+              </Typography>
+              {/* <span className=""> บลาๆๆ</span> */}
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              <Typography gutterBottom variant="h7" component="div" >
+                1. สัญญาประกัน
+              </Typography>
+               {/* <span className=""> จำนวน </span> */}
+              {/*<span className=""> 1 </span>
+              <span className=""> เครื่อง </span>
+              <span className=""> ราคา </span>
+              <span className=""> 14,500 บาท</span> */}
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              <Typography gutterBottom variant="h7" component="div" >
+                2. หน้าจอคอมพิวเตอร์ 23.8 นิ้ว MSI Pro MP241X 75 Hz
+              </Typography>
+              <span className=""> จำนวน </span>
+              <span className=""> 1 </span>
+              <span className=""> เครื่อง </span>
+              <span className=""> ราคา </span>
+              <span className=""> 4,500 บาท</span>
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              <Typography gutterBottom variant="h7" component="div" >
+                3. Barcode Printer+ กระดาษพิมพ์ Sticker + Ribbon Wax
+              </Typography>
+              <span className=""> จำนวน </span>
+              <span className=""> 12 </span>
+              <span className=""> ม้วน </span>
+              <span className=""> ราคา </span>
+              <span className=""> 4,500 บาท</span>
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              <Typography gutterBottom variant="h7" component="div" >
+                4. Barcode Scanner Handheld UV-DT50Q
+              </Typography>
+              <span className=""> จำนวน </span>
+              <span className=""> 2 </span>
+              <span className=""> เครื่อง </span>
+              <span className=""> ราคา </span>
+              <span className=""> 15,500 บาท</span>
+            </Stack>
+
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              {/* <span className="priceTitle"> งบประมาณ: </span> */}
+              <Typography gutterBottom variant="h7" component="div" >
+                งบประมาณ:
+              </Typography>
+              <span className=""> 133,106 บาท</span>
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              {/* <span className="priceTitle"> งบประมาณ: </span> */}
+              <Typography gutterBottom variant="h7" component="div" >
+                ไฟล์แนบ:
+              </Typography>
+              {/* <span className="">1. บลาๆๆๆ .pdf</span> */}
+            </Stack>
+            <Stack direction="row" spacing={2} className="my-2 mb-2">
+              {/* <span className="priceTitle"> งบประมาณ: </span> */}
+              {/* <Typography gutterBottom variant="h7" component="div" >
+                ไฟล์แนบ:
+              </Typography> */}
+              <span className="">1. บลาๆๆๆ .pdf</span>
+            </Stack>
+          </Stack>
+        </Paper>
+        {/* <div>ProjectContract</div> */}
+      </Paper>
+    </>
+  )
+}
